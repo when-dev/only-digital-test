@@ -50,7 +50,7 @@ export function Timeline() {
 		if (!circleSize) return null
 
 		const r = circleSize / 2
-		const startRad = -Math.PI / 3 
+		const startRad = -Math.PI / 3
 		const x = Math.cos(startRad) * r
 		const y = Math.sin(startRad) * r
 		return { x, y }
@@ -117,48 +117,57 @@ export function Timeline() {
 							</span>
 						</div>
 
-						<div className='timeline__circle-wrap'>
-							<div
-								ref={circleRef}
-								className='timeline__circle'
-								style={{ transform: `rotate(${rotationDeg}deg)` }}
-							>
-								{dots.map(({ i, x, y }) => {
-									const isActive = i === activeIndex
+						<div className='timeline__circle-wrap' ref={circleRef}>
+							<div className='timeline__circle'>
+								<div
+									className='timeline__wheel'
+									style={{ transform: `rotate(${rotationDeg}deg)` }}
+								>
+									{dots.map(({ i, x, y }) => {
+										const isActive = i === activeIndex
 
-									const style: React.CSSProperties = {
-										top: '50%',
-										left: '50%',
-										transform: `translate(-50%, -50%) translate(${x}px, ${y}px) rotate(${-rotationDeg}deg)`,
-									}
+										const style: React.CSSProperties = {
+											top: '50%',
+											left: '50%',
+											// позиция точки (вращение wheel повлияет на позицию)
+											transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
+										}
 
-									if (isActive) {
+										if (isActive) {
+											return (
+												<button
+													key={timelinePeriods[i].id}
+													type='button'
+													className='timeline__dot timeline__dot--active'
+													style={style}
+													onClick={() => setActiveIndex(i)}
+													aria-label={`Select period ${i + 1}`}
+												>
+													{/* индекс НЕ должен вращаться вместе с wheel */}
+													<span
+														className='timeline__dot-index'
+														style={{ transform: `rotate(${-rotationDeg}deg)` }}
+													>
+														{i + 1}
+													</span>
+												</button>
+											)
+										}
+
 										return (
 											<button
 												key={timelinePeriods[i].id}
 												type='button'
-												className='timeline__dot timeline__dot--active'
+												className='timeline__dot'
 												style={style}
 												onClick={() => setActiveIndex(i)}
 												aria-label={`Select period ${i + 1}`}
-											>
-												<span className='timeline__dot-index'>{i + 1}</span>
-											</button>
+											/>
 										)
-									}
-
-									return (
-										<button
-											key={timelinePeriods[i].id}
-											type='button'
-											className='timeline__dot'
-											style={style}
-											onClick={() => setActiveIndex(i)}
-											aria-label={`Select period ${i + 1}`}
-										/>
-									)
-								})}
+									})}
+								</div>
 							</div>
+
 							<div className='timeline__category' style={categoryStyle}>
 								{activePeriod.title}
 							</div>
