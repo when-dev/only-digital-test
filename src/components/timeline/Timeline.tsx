@@ -4,19 +4,18 @@ import Slider from '../slider/Slider'
 import './Timeline.scss'
 import { timelinePeriods } from './timelineData'
 import { useTimelineLayout } from '../../hooks/useTimelineLayout'
+import { TimelineYears } from './TimelineYears'
 
 export function Timeline() {
 	const circleRef = useRef<HTMLDivElement | null>(null)
 	const dotRefs = useRef<(HTMLButtonElement | null)[]>([])
-	const yearsFromRef = useRef<HTMLSpanElement | null>(null)
-	const yearsToRef = useRef<HTMLSpanElement | null>(null)
+
 	const sliderRef = useRef<HTMLDivElement | null>(null)
 	const prevActiveRef = useRef(0)
 	const navDirRef = useRef<-1 | 1>(1)
-	const yearsPrevRef = useRef<{ a: number; b: number } | null>(null)
 
 	const circleSize = useTimelineLayout(circleRef)
-	
+
 	const [activeIndex, setActiveIndex] = useState(0)
 
 	const total = timelinePeriods.length
@@ -244,30 +243,6 @@ export function Timeline() {
 	}, [activeIndex, total, circleSize])
 
 	useLayoutEffect(() => {
-		const fromEl = yearsFromRef.current
-		const toEl = yearsToRef.current
-		if (!fromEl || !toEl) return
-
-		const prev = yearsPrevRef.current ?? { a: minYear, b: maxYear }
-		const obj = { a: prev.a, b: prev.b }
-
-		gsap.to(obj, {
-			a: minYear,
-			b: maxYear,
-			duration: 0.6,
-			ease: 'power2.out',
-			overwrite: 'auto',
-			onUpdate: () => {
-				fromEl.textContent = String(Math.round(obj.a))
-				toEl.textContent = String(Math.round(obj.b))
-			},
-			onComplete: () => {
-				yearsPrevRef.current = { a: minYear, b: maxYear }
-			},
-		})
-	}, [minYear, maxYear])
-
-	useLayoutEffect(() => {
 		if (!sliderRef.current) return
 
 		gsap.fromTo(
@@ -299,20 +274,7 @@ export function Timeline() {
 					</header>
 
 					<div className='timeline__stage'>
-						<div className='timeline__years' aria-hidden='true'>
-							<span
-								ref={yearsFromRef}
-								className='timeline__year timeline__year--from'
-							>
-								{minYear}
-							</span>
-							<span
-								ref={yearsToRef}
-								className='timeline__year timeline__year--to timeline__year-right'
-							>
-								{maxYear}
-							</span>
-						</div>
+						<TimelineYears minYear={minYear} maxYear={maxYear} />
 
 						<div className='timeline__circle-wrap' ref={circleRef}>
 							<div className='timeline__circle'>
