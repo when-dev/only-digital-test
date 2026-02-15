@@ -4,7 +4,8 @@
   "description": "Test Task for Only Digital",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack serve --config webpack/webpack.dev.js",
+    "build": "webpack --config webpack/webpack.prod.js" 
   },
   "repository": {
     "type": "git",
