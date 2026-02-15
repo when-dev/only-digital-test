@@ -1,108 +1,87 @@
+:root {
+  --timeline-cross-y: 50vh;
+}
+
 .timeline {
-	padding: 32px 0;
+  padding: 32px 0;
+  position: relative;
+}
+
+.timeline__grid {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  --w: 1436px;
+
+  --pad: 72px;
+
+  --left-x: calc((100vw - var(--w)) / 2 + var(--pad));
+  --right-x: calc((100vw + var(--w)) / 2 - var(--pad));
+  --center-x: 50vw;
+
+  --cross-y: var(--timeline-cross-y);
+
+  background:
+    linear-gradient(to bottom, rgba(66, 86, 122, 0.12), rgba(66, 86, 122, 0.12))
+      var(--left-x) 0 / 1px 100vh no-repeat,
+
+    linear-gradient(to bottom, rgba(66, 86, 122, 0.12), rgba(66, 86, 122, 0.12))
+      var(--right-x) 0 / 1px 100vh no-repeat,
+
+    linear-gradient(to bottom, rgba(66, 86, 122, 0.12), rgba(66, 86, 122, 0.12))
+      var(--center-x) 0 / 1px 100vh no-repeat,
+
+    linear-gradient(to right, rgba(66, 86, 122, 0.12), rgba(66, 86, 122, 0.12))
+      var(--left-x) var(--cross-y) / calc(var(--right-x) - var(--left-x)) 1px no-repeat;
 }
 
 .timeline__container {
-	max-width: 1436px;
-	margin: 0 auto;
-	position: relative;
-	padding: 24px 0;
-
-	&::before {
-		content: '';
-		position: fixed;
-		top: 0;
-		bottom: 0;
-		left: 50%;
-		transform: translateX(-50%);
-		width: 1436px;
-		pointer-events: none;
-		z-index: 0;
-
-		background:
-			linear-gradient(
-					to bottom,
-					rgba(66, 86, 122, 0.12),
-					rgba(66, 86, 122, 0.12)
-				)
-				72px 0 / 1px 100% no-repeat,
-			linear-gradient(
-					to bottom,
-					rgba(66, 86, 122, 0.12),
-					rgba(66, 86, 122, 0.12)
-				)
-				calc(100% - 72px) 0 / 1px 100% no-repeat;
-	}
+  max-width: 1436px;
+  margin: 0 auto;
+  padding: 24px 0;
+  position: relative;
+  z-index: 1;
 }
 
 .timeline__content {
-	position: relative;
-	z-index: 1;
-	padding-left: 120px;
-	padding-right: 120px;
+  padding-left: 120px;
+  padding-right: 120px;
 }
 
 .timeline__header {
-	position: relative;
-	margin-bottom: 24px;
-	padding-left: 0;
+  position: relative;
+  margin-bottom: 24px;
 }
 
 .timeline__accent {
-	position: absolute;
-	left: -50px;
-	top: 0px;
-	width: 5px;
-	height: 120px;
-	background: linear-gradient(180deg, #3877ee 0%, #ef5da8 100%);
+  position: absolute;
+  left: -50px;
+  top: 6px;
+  width: 5px;
+  height: 120px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #3877ee 0%, #ef5da8 100%);
 }
 
 .timeline__title {
-	margin: 0;
-	font-size: 54px;
-	color: #42567a;
-	line-height: 1.1;
+  margin: 0;
+  font-size: 54px;
+  color: #42567a;
+  line-height: 1.1;
 }
 
 .timeline__stage {
-	position: relative;
-	height: 520px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-
-	/* вертикальная линия через центр круга */
-	&::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		left: 50%;
-		width: 1px;
-		transform: translateX(-50%);
-		background: rgba(66, 86, 122, 0.12);
-		pointer-events: none;
-		z-index: 0;
-	}
-
-	/* горизонтальная линия через центр круга */
-	&::after {
-		content: '';
-		position: absolute;
-		left: 72px;
-		right: 72px;
-		top: 50%;
-		height: 1px;
-		transform: translateY(-50%);
-		background: rgba(66, 86, 122, 0.12);
-		pointer-events: none;
-		z-index: 0;
-	}
+  position: relative;
+  height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .timeline__circle-wrap {
   position: relative;
-  z-index: 1; /* поверх крестовины stage */
   width: 530px;
   height: 530px;
   opacity: 0.5;
@@ -110,83 +89,83 @@
 }
 
 .timeline__circle {
-	width: 100%;
-	height: 100%;
-	border-radius: 50%;
-	border: 1px solid rgba(66, 86, 122, 0.25);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: #777;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid rgba(66, 86, 122, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #777;
+  background: transparent;
 }
 
 .timeline__category {
-	position: absolute;
-	top: 40px;
-	right: -120px;
-	font-size: 16px;
-	color: #42567a;
+  position: absolute;
+  top: 40px;
+  right: -120px;
+  font-size: 16px;
+  color: #42567a;
 }
 
 .timeline__years {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 2; /* поверх всего */
 }
 
 .timeline__year {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	font-size: 96px;
-	font-weight: 700;
-	line-height: 1;
-	color: #000;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 96px;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
 }
 
 .timeline__year--from {
-	left: calc(50% - 380px);
+  left: calc(50% - 380px);
 }
 
 .timeline__year--to {
-	right: calc(50% - 380px);
+  right: calc(50% - 380px);
 }
 
 .timeline__bottom {
-	margin-top: 40px;
+  margin-top: 40px;
 }
 
 .timeline__nav {
-	display: grid;
-	gap: 16px;
-	justify-items: start;
-	margin-bottom: 20px;
+  display: grid;
+  gap: 16px;
+  justify-items: start;
+  margin-bottom: 20px;
 }
 
 .timeline__counter {
-	font-size: 14px;
-	color: #666;
+  font-size: 14px;
+  color: #666;
 }
 
 .timeline__buttons {
-	display: flex;
-	gap: 12px;
+  display: flex;
+  gap: 12px;
 }
 
 .timeline__btn {
-	width: 44px;
-	height: 44px;
-	border: 1px solid rgba(66, 86, 122, 0.25);
-	border-radius: 50%;
-	background: #fff;
-	cursor: pointer;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(66, 86, 122, 0.25);
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
 }
 
 .timeline__slider-placeholder {
-	width: 100%;
-	min-height: 140px;
-	border: 1px dashed rgba(66, 86, 122, 0.25);
-	padding: 24px;
-	color: #777;
+  width: 100%;
+  min-height: 140px;
+  border: 1px dashed rgba(66, 86, 122, 0.25);
+  padding: 24px;
+  color: #777;
 }
