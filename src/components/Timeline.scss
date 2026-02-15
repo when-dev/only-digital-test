@@ -97,6 +97,7 @@
 	height: 530px;
 	opacity: 0.5;
 	color: #42567a;
+	z-index: 2;
 }
 
 .timeline__circle {
@@ -123,6 +124,7 @@
 	position: absolute;
 	inset: 0;
 	pointer-events: none;
+	z-index: 3;
 }
 
 .timeline__year {
