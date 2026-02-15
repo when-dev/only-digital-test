@@ -1,8 +1,30 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useMemo, useState } from 'react'
+import { timelinePeriods } from './timelineData'
 import './Timeline.scss'
 
 export function Timeline() {
 	const circleRef = useRef<HTMLDivElement | null>(null)
+	const [activeIndex, setActiveIndex] = useState(0)
+
+	const total = timelinePeriods.length
+	if (total < 2) {
+		console.warn('timelinePeriods should contain 2..6 periods')
+	}
+
+	const activePeriod = timelinePeriods[activeIndex]
+
+	const { minYear, maxYear } = useMemo(() => {
+		const years = activePeriod.events.map(e => e.year)
+		return {
+			minYear: Math.min(...years),
+			maxYear: Math.max(...years),
+		}
+	}, [activePeriod])
+
+	const counterText = `${String(activeIndex + 1).padStart(2, '0')}/${String(total).padStart(2, '0')}`
+
+	const goPrev = () => setActiveIndex(i => (i - 1 + total) % total)
+	const goNext = () => setActiveIndex(i => (i + 1) % total)
 
 	useEffect(() => {
 		const updateCrossY = () => {
@@ -31,7 +53,7 @@ export function Timeline() {
 
 	return (
 		<section className='timeline'>
-			<div className='timeline__grid' aria-hidden='true' >
+			<div className='timeline__grid' aria-hidden='true'>
 				<span className='timeline__grid-centerLine' />
 			</div>
 
@@ -46,8 +68,12 @@ export function Timeline() {
 
 					<div className='timeline__stage'>
 						<div className='timeline__years' aria-hidden='true'>
-							<span className='timeline__year timeline__year--from'>2015</span>
-							<span className='timeline__year timeline__year--to timeline__year-right'>2022</span>
+							<span className='timeline__year timeline__year--from'>
+								{minYear}
+							</span>
+							<span className='timeline__year timeline__year--to timeline__year-right'>
+								{maxYear}
+							</span>
 						</div>
 
 						<div className='timeline__circle-wrap'>
@@ -64,16 +90,17 @@ export function Timeline() {
 								<span className='timeline__dot timeline__dot--bottomRight' />
 							</div>
 
-							<div className='timeline__category'>Наука</div>
+							<div className='timeline__category'>{activePeriod.title}</div>
 						</div>
 					</div>
 
 					<div className='timeline__bottom'>
 						<div className='timeline__nav'>
-							<div className='timeline__counter'>06/06</div>
+							<div className='timeline__counter'>{counterText}</div>
 
 							<div className='timeline__buttons'>
 								<button
+									onClick={goPrev}
 									className='timeline__btn'
 									type='button'
 									aria-label='Prev'
@@ -81,6 +108,7 @@ export function Timeline() {
 									←
 								</button>
 								<button
+									onClick={goNext}
 									className='timeline__btn'
 									type='button'
 									aria-label='Next'
