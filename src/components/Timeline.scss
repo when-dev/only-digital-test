@@ -132,12 +132,16 @@
 	top: 50%;
 	transform: translateY(-50%);
 	font-size: 210px;
-	font-weight: 700;
+	font-weight: 600;
 	line-height: 1;
-	letter-spacing: 0.05em;
+	letter-spacing: -0.02em;
 	user-select: none;
 
 	transition: transform .3s ease, opacity .3s ease;
+}
+
+.timeline__year-right {
+	letter-spacing: 0.03em;
 }
 
 .timeline__year--from {

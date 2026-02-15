@@ -47,7 +47,7 @@ export function Timeline() {
 					<div className='timeline__stage'>
 						<div className='timeline__years' aria-hidden='true'>
 							<span className='timeline__year timeline__year--from'>2015</span>
-							<span className='timeline__year timeline__year--to'>2022</span>
+							<span className='timeline__year timeline__year--to timeline__year-right'>2022</span>
 						</div>
 
 						<div className='timeline__circle-wrap'>
