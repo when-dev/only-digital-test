@@ -11,8 +11,8 @@ module.exports = {
 	resolve: {
 		extensions: ['.ts', '.tsx', '.js', '.jsx'],
 		alias: {
-			"@": path.resolve(__dirname, '../src'),
-		}
+			'@': path.resolve(__dirname, '../src'),
+		},
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
@@ -25,6 +25,10 @@ module.exports = {
 				test: /\.tsx?$/,
 				use: 'ts-loader',
 				exclude: /node_modules/,
+			},
+			{
+				test: /\.s[ac]ss$/i,
+				use: ['style-loader', 'css-loader', 'sass-loader'],
 			},
 		],
 	},
