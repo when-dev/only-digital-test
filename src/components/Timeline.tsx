@@ -33,8 +33,7 @@ export function Timeline() {
 							</button>
 						</div>
 					</div>
-
-					<div className='timeline__slider-placeholder'>slider placeholder</div>
+				<div className='timeline__slider-placeholder'>slider placeholder</div>
 				</div>
 			</div>
 		</section>
