@@ -20,7 +20,7 @@
 
 .timeline__stage {
 	position: relative;
-	height: 420px;
+	height: 520px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -28,8 +28,8 @@
 
 .timeline__circle-wrap {
 	position: relative;
-	width: 420px;
-	height: 420px;
+	width: 520px;
+	height: 520px;
 }
 
 .timeline__circle {
@@ -66,11 +66,11 @@
 }
 
 .timeline__year--from {
-  left: 120px; 
+  left: calc(50% - 380px); 
 }
 
 .timeline__year--to {
-  right: 120px; 
+  right: calc(50% - 380px);
 }
 
 .timeline__bottom {
