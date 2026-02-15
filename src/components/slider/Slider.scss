@@ -1,0 +1,27 @@
+.events {
+	width: 100%;
+	min-width: 0;
+}
+.events .swiper {
+	width: 100%;
+}
+.events .swiper-slide {
+	height: auto;
+}
+
+.events__card {
+	background: transparent;
+}
+
+.events__year {
+	font-size: 24px;
+	font-weight: 700;
+	color: #3877ee;
+	margin-bottom: 8px;
+}
+
+.events__text {
+	font-size: 16px;
+	line-height: 1.45;
+	color: #42567a;
+}

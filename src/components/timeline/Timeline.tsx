@@ -1,5 +1,6 @@
-import { useEffect, useRef, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { timelinePeriods } from './timelineData'
+import Slider from '../slider/Slider'
 import './Timeline.scss'
 
 export function Timeline() {
@@ -185,7 +186,15 @@ export function Timeline() {
 									type='button'
 									aria-label='Prev'
 								>
-									←
+									<svg width='8' height='12' viewBox='0 0 8 12' fill='none'>
+										<path
+											d='M7 1L2 6L7 11'
+											stroke='#42567A'
+											strokeWidth='2'
+											strokeLinecap='round'
+											strokeLinejoin='round'
+										/>
+									</svg>
 								</button>
 								<button
 									onClick={goNext}
@@ -193,13 +202,20 @@ export function Timeline() {
 									type='button'
 									aria-label='Next'
 								>
-									→
+									<svg width='8' height='12' viewBox='0 0 8 12' fill='none'>
+										<path
+											d='M1 1L6 6L1 11'
+											stroke='#42567A'
+											strokeWidth='2'
+											strokeLinecap='round'
+											strokeLinejoin='round'
+										/>
+									</svg>
 								</button>
 							</div>
 						</div>
-
-						<div className='timeline__slider-placeholder'>
-							slider placeholder
+						<div className='timeline__slider'>
+							<Slider events={activePeriod.events} />
 						</div>
 					</div>
 				</div>

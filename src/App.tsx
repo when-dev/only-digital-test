@@ -1,7 +1,9 @@
-import { Timeline } from './components/Timeline'
+import { Timeline } from './components/timeline/Timeline'
 
 export function App() {
-	return <main style={{ padding: 24 }}>
-		<Timeline />
-	</main>
+	return (
+		<main style={{ padding: 24 }}>
+			<Timeline />
+		</main>
+	)
 }

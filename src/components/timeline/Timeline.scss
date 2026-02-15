@@ -1,6 +1,5 @@
 :root {
 	--timeline-cross-y: 50vh;
-	overflow-x: hidden;
 }
 
 .timeline {
@@ -170,7 +169,7 @@
 	display: grid;
 	gap: 16px;
 	justify-items: start;
-	margin-bottom: 20px;
+	margin-bottom: 40px;
 }
 
 .timeline__counter {
