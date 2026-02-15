@@ -7,3 +7,36 @@
 	font-size: 28px;
 	margin-bottom: 24px;
 }
+
+.timeline__years {
+	display: flex;
+	gap: 32px;
+	margin-bottom: 32px;
+}
+
+.timeline_year {
+	font-size: 64px;
+	font-weight: 700;
+}
+
+.timeline__circle-area {
+	display: flex;
+	align-items: center;
+	gap: 24px;
+	margin-bottom: 32px;
+}
+
+.timeline__circle {
+	width: 260px;
+	height: 260px;
+	border-radius: 50%;
+	border: 1px solid #aaa;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.timeline__arrow {
+	width: 40px;
+	height: 40px;
+}
