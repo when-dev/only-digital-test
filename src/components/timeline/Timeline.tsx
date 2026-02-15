@@ -3,6 +3,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import Slider from '../slider/Slider'
 import './Timeline.scss'
 import { timelinePeriods } from './timelineData'
+import { useTimelineLayout } from '../../hooks/useTimelineLayout'
 
 export function Timeline() {
 	const circleRef = useRef<HTMLDivElement | null>(null)
@@ -14,7 +15,8 @@ export function Timeline() {
 	const navDirRef = useRef<-1 | 1>(1)
 	const yearsPrevRef = useRef<{ a: number; b: number } | null>(null)
 
-	const [circleSize, setCircleSize] = useState(0)
+	const circleSize = useTimelineLayout(circleRef)
+	
 	const [activeIndex, setActiveIndex] = useState(0)
 
 	const total = timelinePeriods.length
@@ -79,34 +81,6 @@ export function Timeline() {
 				transform: `translate(-50%, -50%) translate(${anchor.x}px, ${anchor.y}px) translate(86px, 0)`,
 			}
 		: undefined
-
-	useEffect(() => {
-		const updateCrossY = () => {
-			const el = circleRef.current
-			if (!el) return
-
-			const rect = el.getBoundingClientRect()
-
-			setCircleSize(rect.width)
-
-			const centerY = rect.top + rect.height / 2
-
-			document.documentElement.style.setProperty(
-				'--timeline-cross-y',
-				`${centerY}px`,
-			)
-		}
-
-		updateCrossY()
-
-		window.addEventListener('resize', updateCrossY)
-		window.addEventListener('scroll', updateCrossY, { passive: true })
-
-		return () => {
-			window.removeEventListener('resize', updateCrossY)
-			window.removeEventListener('scroll', updateCrossY)
-		}
-	}, [])
 
 	useLayoutEffect(() => {
 		if (!circleSize) return
