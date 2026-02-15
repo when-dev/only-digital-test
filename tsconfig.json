@@ -8,5 +8,9 @@
 		"strict": true,
 		"skipLibCheck": true
 	},
-	"include": ["src"]
+	"include": ["src"],
+	"baseUrl": ".",
+	"paths": {
+		"@/*": ["src/*"]
+	}
 }
