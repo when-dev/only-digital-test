@@ -1,0 +1,21 @@
+{
+  "name": "only-digital-test",
+  "version": "1.0.0",
+  "description": "Test Task for Only Digital",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/when-dev/only-digital-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/when-dev/only-digital-test/issues"
+  },
+  "homepage": "https://github.com/when-dev/only-digital-test#readme"
+}
