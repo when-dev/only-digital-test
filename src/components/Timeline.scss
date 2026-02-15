@@ -113,11 +113,15 @@
 
 .timeline__category {
 	position: absolute;
-	top: 20px;
-	right: -30px;
+	white-space: nowrap;
 	font-size: 20px;
 	font-weight: 600;
 	color: #42567A;
+
+	transition: transform .5s ease, opacity .3s ease;
+	will-change: transform;
+
+	pointer-events: none;
 }
 
 .timeline__years {

@@ -46,6 +46,24 @@ export function Timeline() {
 		})
 	}, [circleSize, total])
 
+	const anchor = useMemo(() => {
+		if (!circleSize) return null
+
+		const r = circleSize / 2
+		const startRad = -Math.PI / 3 
+		const x = Math.cos(startRad) * r
+		const y = Math.sin(startRad) * r
+		return { x, y }
+	}, [circleSize])
+
+	const categoryStyle: React.CSSProperties | undefined = anchor
+		? {
+				top: '50%',
+				left: '50%',
+				transform: `translate(-50%, -50%) translate(${anchor.x}px, ${anchor.y}px) translate(86px, 0)`,
+			}
+		: undefined
+
 	useEffect(() => {
 		const updateCrossY = () => {
 			const el = circleRef.current
@@ -141,7 +159,9 @@ export function Timeline() {
 									)
 								})}
 							</div>
-							<div className='timeline__category'>{activePeriod.title}</div>
+							<div className='timeline__category' style={categoryStyle}>
+								{activePeriod.title}
+							</div>
 						</div>
 					</div>
 
