@@ -136,6 +136,8 @@
 	line-height: 1;
 	letter-spacing: 0.05em;
 	user-select: none;
+
+	transition: transform .3s ease, opacity .3s ease;
 }
 
 .timeline__year--from {
