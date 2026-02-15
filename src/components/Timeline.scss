@@ -116,9 +116,11 @@
 	white-space: nowrap;
 	font-size: 20px;
 	font-weight: 600;
-	color: #42567A;
+	color: #42567a;
 
-	transition: transform .5s ease, opacity .3s ease;
+	transition:
+		transform 0.5s ease,
+		opacity 0.3s ease;
 	will-change: transform;
 
 	pointer-events: none;
@@ -141,7 +143,9 @@
 	letter-spacing: -0.02em;
 	user-select: none;
 
-	transition: transform .3s ease, opacity .3s ease;
+	transition:
+		transform 0.3s ease,
+		opacity 0.3s ease;
 }
 
 .timeline__year-right {
@@ -150,12 +154,12 @@
 
 .timeline__year--from {
 	left: calc(50% - 520px);
-	color: #5D5FEF;
+	color: #5d5fef;
 }
 
 .timeline__year--to {
 	right: calc(50% - 520px);
-	color: #EF5DA8;
+	color: #ef5da8;
 }
 
 .timeline__bottom {
@@ -199,30 +203,43 @@
 .timeline__circle {
 	position: relative;
 	transform-origin: 50% 50%;
-	transition: transform .5s ease;
+	transition: transform 0.5s ease;
 }
 
 .timeline__dot {
 	position: absolute;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #42567a;
 
-  border: 0;
-  padding: 0;
-  margin: 0;
-  outline: none;
-  appearance: none;
-  -webkit-appearance: none;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: #42567a;
 
-  cursor: pointer;
+	border: 0;
+	padding: 0;
+	margin: 0;
+	outline: none;
+	appearance: none;
+	-webkit-appearance: none;
+	cursor: pointer;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	transition:
+		width 0.3 ease,
+		height 0.3 ease,
+		background-color 0.3 ease,
+		border-color 0.3 ease,
+		box-shadow 0.3 ease;
+	will-change: width, height;
 }
 
 .timeline__dot--active {
 	width: 56px;
 	height: 56px;
 	background: #f4f5f9;
+	box-shadow: 0 6px 18px rgba(66, 86, 122, 0.12);
 	border: 1px solid rgba(66, 86, 122, 1);
 	border-radius: 50%;
 	display: flex;
@@ -231,7 +248,25 @@
 }
 
 .timeline__dot-index {
+	opacity: 0;
+	transform: scale(0.85);
+	transition:
+		opacity 160ms ease,
+		transform 200ms ease;
 	font-size: 16px;
 	font-weight: 600;
 	color: #42567a;
+	user-select: none;
+}
+
+.timeline__dot--active .timeline__dot-index {
+	opacity: 1;
+	transform: scale(1);
+}
+
+.timeline__dot {
+	z-index: 1;
+}
+.timeline__dot--active {
+	z-index: 2;
 }
