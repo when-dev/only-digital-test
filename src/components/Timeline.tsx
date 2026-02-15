@@ -4,6 +4,7 @@ import './Timeline.scss'
 
 export function Timeline() {
 	const circleRef = useRef<HTMLDivElement | null>(null)
+	const [circleSize, setCircleSize] = useState(0)
 	const [activeIndex, setActiveIndex] = useState(0)
 
 	const total = timelinePeriods.length
@@ -26,12 +27,34 @@ export function Timeline() {
 	const goPrev = () => setActiveIndex(i => (i - 1 + total) % total)
 	const goNext = () => setActiveIndex(i => (i + 1) % total)
 
+	const stepDeg = 360 / total
+
+	const rotationDeg = -activeIndex * stepDeg
+
+	const dots = useMemo(() => {
+		if (!circleSize || total === 0) return []
+
+		const r = circleSize / 2
+		const startRad = -Math.PI / 3
+		const radius = r
+
+		return Array.from({ length: total }, (_, i) => {
+			const angle = startRad + (2 * Math.PI * i) / total
+			const x = Math.cos(angle) * radius
+			const y = Math.sin(angle) * radius
+			return { i, x, y }
+		})
+	}, [circleSize, total])
+
 	useEffect(() => {
 		const updateCrossY = () => {
 			const el = circleRef.current
 			if (!el) return
 
 			const rect = el.getBoundingClientRect()
+
+			setCircleSize(rect.width)
+
 			const centerY = rect.top + rect.height / 2
 
 			document.documentElement.style.setProperty(
@@ -77,19 +100,47 @@ export function Timeline() {
 						</div>
 
 						<div className='timeline__circle-wrap'>
-							<div ref={circleRef} className='timeline__circle'>
-								<span className='timeline__dot timeline__dot--topLeft' />
-								<span className='timeline__dot timeline__dot--topRight timeline__dot--active'>
-									<span className='timeline__dot-index'>6</span>
-								</span>
+							<div
+								ref={circleRef}
+								className='timeline__circle'
+								style={{ transform: `rotate(${rotationDeg}deg)` }}
+							>
+								{dots.map(({ i, x, y }) => {
+									const isActive = i === activeIndex
 
-								<span className='timeline__dot timeline__dot--left' />
-								<span className='timeline__dot timeline__dot--right' />
+									const style: React.CSSProperties = {
+										top: '50%',
+										left: '50%',
+										transform: `translate(-50%, -50%) translate(${x}px, ${y}px) rotate(${-rotationDeg}deg)`,
+									}
 
-								<span className='timeline__dot timeline__dot--bottomLeft' />
-								<span className='timeline__dot timeline__dot--bottomRight' />
+									if (isActive) {
+										return (
+											<button
+												key={timelinePeriods[i].id}
+												type='button'
+												className='timeline__dot timeline__dot--active'
+												style={style}
+												onClick={() => setActiveIndex(i)}
+												aria-label={`Select period ${i + 1}`}
+											>
+												<span className='timeline__dot-index'>{i + 1}</span>
+											</button>
+										)
+									}
+
+									return (
+										<button
+											key={timelinePeriods[i].id}
+											type='button'
+											className='timeline__dot'
+											style={style}
+											onClick={() => setActiveIndex(i)}
+											aria-label={`Select period ${i + 1}`}
+										/>
+									)
+								})}
 							</div>
-
 							<div className='timeline__category'>{activePeriod.title}</div>
 						</div>
 					</div>
