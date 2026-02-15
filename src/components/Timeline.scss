@@ -9,13 +9,26 @@
 }
 
 .timeline__header {
+	display: flex;
+	align-items: flex-start;
+	gap: 16px;
 	margin-bottom: 24px;
+}
+
+.timeline__accent {
+	width: 5px;
+	height: 120px;
+	border-radius: 2px;
+	background: linear-gradient(180deg, #3877ee 0%, #ef5da8 100%);
+	margin-top: 6px;
 }
 
 .timeline__title {
 	margin: 0;
-	font-size: 36px;
+	font-size: 54px;
+	color: #42567A;
 	line-height: 1.1;
+	margin-left: 56px;
 }
 
 .timeline__stage {
@@ -28,8 +41,10 @@
 
 .timeline__circle-wrap {
 	position: relative;
-	width: 520px;
-	height: 520px;
+	width: 530px;
+	height: 530px;
+	opacity: .5;
+	color: #42567A;
 }
 
 .timeline__circle {
@@ -51,26 +66,26 @@
 }
 
 .timeline__years {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
 }
 
 .timeline__year {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 96px;
-  font-weight: 700;
-  line-height: 1;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 96px;
+	font-weight: 700;
+	line-height: 1;
 }
 
 .timeline__year--from {
-  left: calc(50% - 380px); 
+	left: calc(50% - 380px);
 }
 
 .timeline__year--to {
-  right: calc(50% - 380px);
+	right: calc(50% - 380px);
 }
 
 .timeline__bottom {

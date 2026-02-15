@@ -5,7 +5,8 @@ export function Timeline() {
 		<section className='timeline'>
 			<div className='timeline__container'>
 				<header className='timeline__header'>
-					<h2 className='timeline__title'>Исторические даты</h2>
+					<span className="timeline__accent" aria-hidden="true" />
+					<h2 className='timeline__title'>Исторические <br/> даты</h2>
 				</header>
 
 				<div className='timeline__stage'>
