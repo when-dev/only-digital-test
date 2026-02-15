@@ -9,7 +9,7 @@ module.exports = merge(common, {
 		open: true,
 		hot: true,
 		static: {
-			directory: 'public',
+			directory: path.resolve(__dirname, '../public'),
 		},
 	},
 })
