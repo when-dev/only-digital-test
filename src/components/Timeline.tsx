@@ -31,7 +31,9 @@ export function Timeline() {
 
 	return (
 		<section className='timeline'>
-			<div className='timeline__grid' aria-hidden='true' />
+			<div className='timeline__grid' aria-hidden='true' >
+				<span className='timeline__grid-centerLine' />
+			</div>
 
 			<div className='timeline__container'>
 				<div className='timeline__content'>
