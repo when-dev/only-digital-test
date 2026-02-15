@@ -16,7 +16,7 @@
 
 	--w: 1436px;
 
-	--pad: 72px;
+	--pad: 0px;
 
 	--left-x: calc((100vw - var(--w)) / 2 + var(--pad));
 	--right-x: calc((100vw + var(--w)) / 2 - var(--pad));
@@ -68,7 +68,7 @@
 
 .timeline__accent {
 	position: absolute;
-	left: -50px;
+	left: -122px;
 	top: 6px;
 	width: 5px;
 	height: 120px;
@@ -190,14 +190,6 @@
 	border-radius: 50%;
 	background: #fff;
 	cursor: pointer;
-}
-
-.timeline__slider-placeholder {
-	width: 100%;
-	min-height: 140px;
-	border: 1px dashed rgba(66, 86, 122, 0.2);
-	padding: 24px;
-	color: #777;
 }
 
 .timeline__circle {
