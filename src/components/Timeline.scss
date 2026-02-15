@@ -116,7 +116,7 @@
 	top: 40px;
 	right: -120px;
 	font-size: 16px;
-	color: #42567A;
+	color: #42567a;
 }
 
 .timeline__years {
@@ -129,18 +129,21 @@
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
-	font-size: 96px;
+	font-size: 210px;
 	font-weight: 700;
 	line-height: 1;
-	color: #000;
+	letter-spacing: 0.05em;
+	user-select: none;
 }
 
 .timeline__year--from {
-	left: calc(50% - 380px);
+	left: calc(50% - 520px);
+	color: #5D5FEF;
 }
 
 .timeline__year--to {
-	right: calc(50% - 380px);
+	right: calc(50% - 520px);
+	color: #EF5DA8;
 }
 
 .timeline__bottom {
