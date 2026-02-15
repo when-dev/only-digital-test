@@ -1,7 +1,9 @@
+import './Timeline.scss'
+
 export function Timeline() {
 	return (
-		<section>
-			<h2>Timeline block</h2>
+		<section className='timeline'>
+			<h2 className='timeline__title'>Timeline block</h2>
 		</section>
 	)
 }
