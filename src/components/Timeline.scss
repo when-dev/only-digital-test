@@ -1,171 +1,236 @@
 :root {
-  --timeline-cross-y: 50vh;
+	--timeline-cross-y: 50vh;
 }
 
 .timeline {
-  padding: 32px 0;
-  position: relative;
+	padding: 32px 0;
+	position: relative;
 }
 
 .timeline__grid {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	z-index: 0;
 
-  --w: 1436px;
+	--w: 1436px;
 
-  --pad: 72px;
+	--pad: 72px;
 
-  --left-x: calc((100vw - var(--w)) / 2 + var(--pad));
-  --right-x: calc((100vw + var(--w)) / 2 - var(--pad));
-  --center-x: 50vw;
+	--left-x: calc((100vw - var(--w)) / 2 + var(--pad));
+	--right-x: calc((100vw + var(--w)) / 2 - var(--pad));
+	--center-x: 50vw;
 
-  --cross-y: var(--timeline-cross-y);
+	--cross-y: var(--timeline-cross-y);
 
-  background:
-    linear-gradient(to bottom, rgba(66, 86, 122, 0.12), rgba(66, 86, 122, 0.12))
-      var(--left-x) 0 / 1px 100vh no-repeat,
-
-    linear-gradient(to bottom, rgba(66, 86, 122, 0.12), rgba(66, 86, 122, 0.12))
-      var(--right-x) 0 / 1px 100vh no-repeat,
-
-    linear-gradient(to bottom, rgba(66, 86, 122, 0.12), rgba(66, 86, 122, 0.12))
-      var(--center-x) 0 / 1px 100vh no-repeat,
-
-    linear-gradient(to right, rgba(66, 86, 122, 0.12), rgba(66, 86, 122, 0.12))
-      var(--left-x) var(--cross-y) / calc(var(--right-x) - var(--left-x)) 1px no-repeat;
+	background:
+		linear-gradient(to bottom, rgba(66, 86, 122, 0.12), rgba(66, 86, 122, 0.12))
+			var(--left-x) 0 / 1px 100vh no-repeat,
+		linear-gradient(to bottom, rgba(66, 86, 122, 0.12), rgba(66, 86, 122, 0.12))
+			var(--right-x) 0 / 1px 100vh no-repeat,
+		linear-gradient(to bottom, rgba(66, 86, 122, 0.12), rgba(66, 86, 122, 0.12))
+			var(--center-x) 0 / 1px 100vh no-repeat,
+		linear-gradient(to right, rgba(66, 86, 122, 0.12), rgba(66, 86, 122, 0.12))
+			var(--left-x) var(--cross-y) / calc(var(--right-x) - var(--left-x)) 1px
+			no-repeat;
 }
 
 .timeline__container {
-  max-width: 1436px;
-  margin: 0 auto;
-  padding: 24px 0;
-  position: relative;
-  z-index: 1;
+	max-width: 1436px;
+	margin: 0 auto;
+	padding: 24px 0;
+	position: relative;
+	z-index: 1;
 }
 
 .timeline__content {
-  padding-left: 120px;
-  padding-right: 120px;
+	padding-left: 120px;
+	padding-right: 120px;
 }
 
 .timeline__header {
-  position: relative;
-  margin-bottom: 24px;
+	position: relative;
+	margin-bottom: 24px;
 }
 
 .timeline__accent {
-  position: absolute;
-  left: -50px;
-  top: 6px;
-  width: 5px;
-  height: 120px;
-  border-radius: 2px;
-  background: linear-gradient(180deg, #3877ee 0%, #ef5da8 100%);
+	position: absolute;
+	left: -50px;
+	top: 6px;
+	width: 5px;
+	height: 120px;
+	border-radius: 2px;
+	background: linear-gradient(180deg, #3877ee 0%, #ef5da8 100%);
 }
 
 .timeline__title {
-  margin: 0;
-  font-size: 54px;
-  color: #42567a;
-  line-height: 1.1;
+	margin: 0;
+	font-size: 54px;
+	color: #42567a;
+	line-height: 1.1;
 }
 
 .timeline__stage {
-  position: relative;
-  height: 520px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	position: relative;
+	height: 520px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .timeline__circle-wrap {
-  position: relative;
-  width: 530px;
-  height: 530px;
-  opacity: 0.5;
-  color: #42567a;
+	position: relative;
+	width: 530px;
+	height: 530px;
+	opacity: 0.5;
+	color: #42567a;
 }
 
 .timeline__circle {
-  width: 100%;
-  height: 100%;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	border: 1px solid rgba(66, 86, 122, 0.25);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #777;
+	background: transparent;
+}
+
+.timeline__category {
+	position: absolute;
+	top: 40px;
+	right: -120px;
+	font-size: 16px;
+	color: #42567a;
+}
+
+.timeline__years {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+}
+
+.timeline__year {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 96px;
+	font-weight: 700;
+	line-height: 1;
+	color: #000;
+}
+
+.timeline__year--from {
+	left: calc(50% - 380px);
+}
+
+.timeline__year--to {
+	right: calc(50% - 380px);
+}
+
+.timeline__bottom {
+	margin-top: 40px;
+}
+
+.timeline__nav {
+	display: grid;
+	gap: 16px;
+	justify-items: start;
+	margin-bottom: 20px;
+}
+
+.timeline__counter {
+	font-size: 14px;
+	color: #666;
+}
+
+.timeline__buttons {
+	display: flex;
+	gap: 12px;
+}
+
+.timeline__btn {
+	width: 44px;
+	height: 44px;
+	border: 1px solid rgba(66, 86, 122, 0.25);
+	border-radius: 50%;
+	background: #fff;
+	cursor: pointer;
+}
+
+.timeline__slider-placeholder {
+	width: 100%;
+	min-height: 140px;
+	border: 1px dashed rgba(66, 86, 122, 0.25);
+	padding: 24px;
+	color: #777;
+}
+
+.timeline__circle {
+  position: relative;
+}
+
+.timeline__dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
+  background: #42567a;
+  opacity: 1;
+}
+
+
+.timeline__dot--left {
+  top: 50%;
+  left: -1px;
+  transform: translate(-50%, -50%);
+}
+
+.timeline__dot--right {
+  top: 50%;
+  right: 1px;
+  transform: translate(50%, -50%);
+}
+
+.timeline__dot--topLeft {
+  top: calc(50% - 231px);
+  left: calc(50% - 129px);
+  transform: translate(-50%, -50%);
+}
+
+.timeline__dot--topRight {
+  top: calc(50% - 231px);
+  left: calc(50% + 129px);
+  transform: translate(-50%, -50%);
+}
+
+.timeline__dot--bottomLeft {
+  top: calc(50% + 231px);
+  left: calc(50% + 129px);
+  transform: translate(-50%, -50%);
+}
+
+.timeline__dot--bottomRight {
+  top: calc(50% + 231px);
+  left: calc(50% - 129px);
+  transform: translate(-50%, -50%);
+}
+
+
+.timeline__dot--active {
+  width: 56px;
+  height: 56px;
+  background: #f4f5f9;
   border: 1px solid rgba(66, 86, 122, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #777;
-  background: transparent;
 }
 
-.timeline__category {
-  position: absolute;
-  top: 40px;
-  right: -120px;
+.timeline__dot-index {
   font-size: 16px;
+  font-weight: 600;
   color: #42567a;
-}
-
-.timeline__years {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.timeline__year {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 96px;
-  font-weight: 700;
-  line-height: 1;
-  color: #000;
-}
-
-.timeline__year--from {
-  left: calc(50% - 380px);
-}
-
-.timeline__year--to {
-  right: calc(50% - 380px);
-}
-
-.timeline__bottom {
-  margin-top: 40px;
-}
-
-.timeline__nav {
-  display: grid;
-  gap: 16px;
-  justify-items: start;
-  margin-bottom: 20px;
-}
-
-.timeline__counter {
-  font-size: 14px;
-  color: #666;
-}
-
-.timeline__buttons {
-  display: flex;
-  gap: 12px;
-}
-
-.timeline__btn {
-  width: 44px;
-  height: 44px;
-  border: 1px solid rgba(66, 86, 122, 0.25);
-  border-radius: 50%;
-  background: #fff;
-  cursor: pointer;
-}
-
-.timeline__slider-placeholder {
-  width: 100%;
-  min-height: 140px;
-  border: 1px dashed rgba(66, 86, 122, 0.25);
-  padding: 24px;
-  color: #777;
 }

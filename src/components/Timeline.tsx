@@ -50,7 +50,16 @@ export function Timeline() {
 
 						<div className='timeline__circle-wrap'>
 							<div ref={circleRef} className='timeline__circle'>
-								circle
+								<span className='timeline__dot timeline__dot--topLeft' />
+								<span className='timeline__dot timeline__dot--topRight timeline__dot--active'>
+									<span className='timeline__dot-index'>6</span>
+								</span>
+
+								<span className='timeline__dot timeline__dot--left' />
+								<span className='timeline__dot timeline__dot--right' />
+
+								<span className='timeline__dot timeline__dot--bottomLeft' />
+								<span className='timeline__dot timeline__dot--bottomRight' />
 							</div>
 
 							<div className='timeline__category'>Наука</div>
