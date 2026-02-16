@@ -1,0 +1,248 @@
+import gsap from 'gsap'
+import { useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { useTimelineLayout } from '../../../hooks/useTimelineLayout'
+import { getTimelineAnchor, getTimelineDots } from '../lib/timelineGeometry'
+import Slider from '../../slider/Slider'
+import { timelinePeriods } from '../mockData/timelineData'
+import TimelineDots from './TimelineDots'
+import './Timeline.scss'
+import { TimelineYears } from './TimelineYears'
+
+export function Timeline() {
+	const circleRef = useRef<HTMLDivElement | null>(null)
+	const sliderRef = useRef<HTMLDivElement | null>(null)
+	const navDirRef = useRef<-1 | 1>(1)
+
+	const circleSize = useTimelineLayout(circleRef)
+
+	const [activeIndex, setActiveIndex] = useState(0)
+
+	const total = timelinePeriods.length
+	if (total < 2) {
+		console.warn('timelinePeriods should contain 2..6 periods')
+	}
+
+	const activePeriod = timelinePeriods[activeIndex]
+
+	const { minYear, maxYear } = useMemo(() => {
+		const years = activePeriod.events.map(e => e.year)
+		return {
+			minYear: Math.min(...years),
+			maxYear: Math.max(...years),
+		}
+	}, [activePeriod])
+
+	const counterText = `${String(activeIndex + 1).padStart(2, '0')}/${String(total).padStart(2, '0')}`
+
+	const goPrev = () => {
+		navDirRef.current = -1
+		setActiveIndex(i => (i - 1 + total) % total)
+	}
+	const goNext = () => {
+		navDirRef.current = 1
+		setActiveIndex(i => (i + 1) % total)
+	}
+
+	const stepDeg = 360 / total
+
+	const rotationDeg = -activeIndex * stepDeg
+
+	const dots = useMemo(
+		() => getTimelineDots({ size: circleSize, total }),
+		[circleSize, total],
+	)
+
+	const anchor = useMemo(
+		() => getTimelineAnchor({ size: circleSize }),
+		[circleSize],
+	)
+
+	const categoryStyle: React.CSSProperties | undefined = anchor
+		? {
+				top: '50%',
+				left: '50%',
+				transform: `translate(-50%, -50%) translate(${anchor.x}px, ${anchor.y}px) translate(86px, 0)`,
+			}
+		: undefined
+
+	useLayoutEffect(() => {
+		if (!sliderRef.current) return
+
+		gsap.fromTo(
+			sliderRef.current,
+			{ autoAlpha: 0, y: 12 },
+			{
+				autoAlpha: 1,
+				y: 0,
+				duration: 0.35,
+				ease: 'power2.out',
+				overwrite: 'auto',
+			},
+		)
+	}, [activeIndex])
+
+	return (
+		<section className='timeline'>
+			<div className='timeline__grid' aria-hidden='true'>
+				<span className='timeline__grid-centerLine' />
+			</div>
+
+			<div className='timeline__container'>
+				<div className='timeline__content'>
+					<header className='timeline__header'>
+						<span className='timeline__accent' aria-hidden='true' />
+						<h2 className='timeline__title'>
+							Исторические <br /> даты
+						</h2>
+					</header>
+
+					{/* mobile */}
+					<div className='timeline__mobile'>
+						<div className='timeline__mobileYears'>
+							<TimelineYears minYear={minYear} maxYear={maxYear} />
+						</div>
+
+						<div className='timeline__mobileCategory'>{activePeriod.title}</div>
+
+						<div className='timeline__divider' />
+
+						<div
+							ref={sliderRef}
+							className='timeline__slider timeline__slider--mobile'
+						>
+							<Slider events={activePeriod.events} />
+						</div>
+
+						<div className='timeline__mobileNav'>
+							<div className='timeline__navLeft'>
+								<div className='timeline__counter'>{counterText}</div>
+
+								<div className='timeline__buttons'>
+									<button
+										onClick={goPrev}
+										className='timeline__btn'
+										type='button'
+										aria-label='Prev'
+									>
+										<svg width='8' height='12' viewBox='0 0 8 12' fill='none'>
+											<path
+												d='M7 1L2 6L7 11'
+												stroke='#42567A'
+												strokeWidth='2'
+												strokeLinecap='round'
+												strokeLinejoin='round'
+											/>
+										</svg>
+									</button>
+									<button
+										onClick={goNext}
+										className='timeline__btn'
+										type='button'
+										aria-label='Next'
+									>
+										<svg width='8' height='12' viewBox='0 0 8 12' fill='none'>
+											<path
+												d='M1 1L6 6L1 11'
+												stroke='#42567A'
+												strokeWidth='2'
+												strokeLinecap='round'
+												strokeLinejoin='round'
+											/>
+										</svg>
+									</button>
+								</div>
+							</div>
+
+							<div className='timeline__navDots' aria-hidden='true'>
+								{Array.from({ length: total }, (_, i) => (
+									<span
+										key={i}
+										className={`timeline__navDot ${i === activeIndex ? 'is-active' : ''}`}
+									/>
+								))}
+							</div>
+
+							<div />
+						</div>
+					</div>
+
+					{/* desktop */}
+					<div className='timeline__stage timeline__stage--desktop'>
+						<TimelineYears minYear={minYear} maxYear={maxYear} />
+
+						<div className='timeline__circle-wrap' ref={circleRef}>
+							<div className='timeline__circle'>
+								<div
+									className='timeline__wheel'
+									style={{ transform: `rotate(${rotationDeg}deg)` }}
+								>
+									<TimelineDots
+										dots={dots}
+										total={total}
+										activeIndex={activeIndex}
+										rotationDeg={rotationDeg}
+										navDirRef={navDirRef}
+										onSelect={setActiveIndex}
+									/>
+								</div>
+							</div>
+
+							<div
+								className='timeline__category timeline__category--desktop'
+								style={categoryStyle}
+							>
+								{activePeriod.title}
+							</div>
+						</div>
+					</div>
+
+					<div className='timeline__bottom timeline__bottom--desktop'>
+						<div className='timeline__nav'>
+							<div className='timeline__counter'>{counterText}</div>
+
+							<div className='timeline__buttons'>
+								<button
+									onClick={goPrev}
+									className='timeline__btn'
+									type='button'
+									aria-label='Prev'
+								>
+									<svg width='8' height='12' viewBox='0 0 8 12' fill='none'>
+										<path
+											d='M7 1L2 6L7 11'
+											stroke='#42567A'
+											strokeWidth='2'
+											strokeLinecap='round'
+											strokeLinejoin='round'
+										/>
+									</svg>
+								</button>
+								<button
+									onClick={goNext}
+									className='timeline__btn'
+									type='button'
+									aria-label='Next'
+								>
+									<svg width='8' height='12' viewBox='0 0 8 12' fill='none'>
+										<path
+											d='M1 1L6 6L1 11'
+											stroke='#42567A'
+											strokeWidth='2'
+											strokeLinecap='round'
+											strokeLinejoin='round'
+										/>
+									</svg>
+								</button>
+							</div>
+						</div>
+						<div ref={sliderRef} className='timeline__slider'>
+							<Slider events={activePeriod.events} />
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	)
+}
+
+export default Timeline

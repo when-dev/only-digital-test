@@ -1,0 +1,50 @@
+.events {
+	position: relative;
+}
+
+.events .swiper {
+	width: 100%;
+}
+.events .swiper-slide {
+	height: auto;
+}
+
+.events__card {
+	padding-right: 24px;
+}
+
+.events__year {
+	font-size: 24px;
+	font-weight: 700;
+	color: #3877ee;
+	margin-bottom: 8px;
+}
+
+.events__text {
+	font-size: 16px;
+	line-height: 1.45;
+	color: #42567a;
+}
+
+.events__arrow {
+	position: absolute;
+	top: 28px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	border: 1px solid rgba(66, 86, 122, 0.2);
+  background: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 5;
+  box-shadow: 0 6px 18px rgba(56, 119, 238, 0.12);
+}
+
+.events__arrow--right {
+	right: -65px;
+}
+
+.events__arrow--left {
+	left: -65px;
+}
