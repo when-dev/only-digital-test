@@ -1,10 +1,7 @@
 import gsap from 'gsap'
 import { useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { useTimelineLayout } from '../../../hooks/useTimelineLayout'
-import {
-	getTimelineAnchor,
-	getTimelineDots,
-} from '../lib/timelineGeometry'
+import { getTimelineAnchor, getTimelineDots } from '../lib/timelineGeometry'
 import Slider from '../../slider/Slider'
 import { timelinePeriods } from '../mockData/timelineData'
 import TimelineDots from './TimelineDots'
@@ -99,7 +96,78 @@ export function Timeline() {
 						</h2>
 					</header>
 
-					<div className='timeline__stage'>
+					{/* mobile */}
+					<div className='timeline__mobile'>
+						<div className='timeline__mobileYears'>
+							<TimelineYears minYear={minYear} maxYear={maxYear} />
+						</div>
+
+						<div className='timeline__mobileCategory'>{activePeriod.title}</div>
+
+						<div className='timeline__divider' />
+
+						<div
+							ref={sliderRef}
+							className='timeline__slider timeline__slider--mobile'
+						>
+							<Slider events={activePeriod.events} />
+						</div>
+
+						<div className='timeline__mobileNav'>
+							<div className='timeline__navLeft'>
+								<div className='timeline__counter'>{counterText}</div>
+
+								<div className='timeline__buttons'>
+									<button
+										onClick={goPrev}
+										className='timeline__btn'
+										type='button'
+										aria-label='Prev'
+									>
+										<svg width='8' height='12' viewBox='0 0 8 12' fill='none'>
+											<path
+												d='M7 1L2 6L7 11'
+												stroke='#42567A'
+												strokeWidth='2'
+												strokeLinecap='round'
+												strokeLinejoin='round'
+											/>
+										</svg>
+									</button>
+									<button
+										onClick={goNext}
+										className='timeline__btn'
+										type='button'
+										aria-label='Next'
+									>
+										<svg width='8' height='12' viewBox='0 0 8 12' fill='none'>
+											<path
+												d='M1 1L6 6L1 11'
+												stroke='#42567A'
+												strokeWidth='2'
+												strokeLinecap='round'
+												strokeLinejoin='round'
+											/>
+										</svg>
+									</button>
+								</div>
+							</div>
+
+							<div className='timeline__navDots' aria-hidden='true'>
+								{Array.from({ length: total }, (_, i) => (
+									<span
+										key={i}
+										className={`timeline__navDot ${i === activeIndex ? 'is-active' : ''}`}
+									/>
+								))}
+							</div>
+
+							<div />
+						</div>
+					</div>
+
+					{/* desktop */}
+					<div className='timeline__stage timeline__stage--desktop'>
 						<TimelineYears minYear={minYear} maxYear={maxYear} />
 
 						<div className='timeline__circle-wrap' ref={circleRef}>
@@ -119,13 +187,16 @@ export function Timeline() {
 								</div>
 							</div>
 
-							<div className='timeline__category' style={categoryStyle}>
+							<div
+								className='timeline__category timeline__category--desktop'
+								style={categoryStyle}
+							>
 								{activePeriod.title}
 							</div>
 						</div>
 					</div>
 
-					<div className='timeline__bottom'>
+					<div className='timeline__bottom timeline__bottom--desktop'>
 						<div className='timeline__nav'>
 							<div className='timeline__counter'>{counterText}</div>
 

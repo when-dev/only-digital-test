@@ -1,6 +1,5 @@
 :root {
 	--timeline-cross-y: 50vh;
-	overflow-x: hidden;
 }
 
 .timeline {
@@ -271,4 +270,139 @@
 	transform: scale(0.9);
 	transform-origin: 50% 50%;
 	will-change: transform, opacity;
+}
+
+.timeline__mobile {
+	display: none;
+}
+
+// mobile
+
+@media (max-width: 768px) {
+  .timeline__grid {
+    display: none;
+  }
+
+  .timeline__content {
+    padding: 0 20px;  
+  }
+
+  .timeline__title {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .timeline__stage--desktop,
+  .timeline__bottom--desktop {
+    display: none;
+  }
+
+  .timeline__mobile {
+    display: block;
+    margin-top: 60px; 
+  }
+
+  .timeline__years {
+    position: relative;
+    inset: auto;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    pointer-events: none;
+  }
+
+  .timeline__year {
+    position: relative;
+    top: auto;
+    transform: none;
+    font-size: 72px;
+    line-height: 1;
+  }
+
+  .timeline__year--from,
+  .timeline__year--to {
+    left: auto;
+    right: auto;
+  }
+
+  .timeline__mobileCategory {
+    margin-top: 60px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #42567a;
+  }
+
+  .timeline__divider {
+    height: 1px;
+    background: rgba(66, 86, 122, 0.2);
+    margin-top: 20px; 
+    margin-bottom: 20px;
+  }
+
+  .timeline__slider--mobile {
+    margin-top: 0;
+		min-height: 220px;
+  }
+
+  .events__arrow {
+    display: none;
+  }
+
+	.events__text {
+		max-width: 170px;
+		font-size: 18px;
+	}
+
+  .timeline__mobileNav {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .timeline__navLeft {
+    display: grid;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .timeline__counter {
+		min-height: 18px;
+    font-size: 14px;
+    color: #666;
+  }
+
+  .timeline__buttons {
+    display: flex;
+		align-items: center;
+    height: 44px;
+  }
+
+  .timeline__btn {
+    width: 44px;
+    height: 44px;
+		flex-shrink: 0;
+    border: 1px solid rgba(66, 86, 122, 0.2);
+    border-radius: 50%;
+    background: #fff;
+  }
+
+  .timeline__navDots {
+    display: flex;
+    align-items: start;
+    gap: 10px;
+		margin-top: 15px;
+  }
+
+  .timeline__navDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #adb5c6; 
+  }
+
+  .timeline__navDot.is-active {
+    background: #42567a; 
+  }
 }

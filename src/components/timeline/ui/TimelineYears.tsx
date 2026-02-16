@@ -10,8 +10,10 @@ export function TimelineYears({ minYear, maxYear }: Props) {
 	const fromRef = useRef<HTMLSpanElement | null>(null)
 	const toRef = useRef<HTMLSpanElement | null>(null)
 	const prevRef = useRef<{ a: number; b: number } | null>(null)
+	const tweenRef = useRef<gsap.core.Tween | null>(null)
 
 	useLayoutEffect(() => {
+		tweenRef.current?.kill()
 		const fromEl = fromRef.current
 		const toEl = toRef.current
 		if (!fromEl || !toEl) return
@@ -19,7 +21,7 @@ export function TimelineYears({ minYear, maxYear }: Props) {
 		const prev = prevRef.current ?? { a: minYear, b: maxYear }
 		const obj = { a: prev.a, b: prev.b }
 
-		gsap.to(obj, {
+		tweenRef.current =gsap.to(obj, {
 			a: minYear,
 			b: maxYear,
 			duration: 0.6,
