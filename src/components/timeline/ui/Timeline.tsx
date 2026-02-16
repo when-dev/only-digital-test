@@ -1,19 +1,18 @@
 import gsap from 'gsap'
 import { useLayoutEffect, useMemo, useRef, useState } from 'react'
-import Slider from '../slider/Slider'
-import './Timeline.scss'
-import { timelinePeriods } from './timelineData'
-import { useTimelineLayout } from '../../hooks/useTimelineLayout'
-import { TimelineYears } from './TimelineYears'
-import TimelineDots from './TimelineDots'
+import { useTimelineLayout } from '../../../hooks/useTimelineLayout'
 import {
 	getTimelineAnchor,
 	getTimelineDots,
-} from '../../utils/timelineGeometry'
+} from '../lib/timelineGeometry'
+import Slider from '../../slider/Slider'
+import { timelinePeriods } from '../mockData/timelineData'
+import TimelineDots from './TimelineDots'
+import './Timeline.scss'
+import { TimelineYears } from './TimelineYears'
 
 export function Timeline() {
 	const circleRef = useRef<HTMLDivElement | null>(null)
-
 	const sliderRef = useRef<HTMLDivElement | null>(null)
 	const navDirRef = useRef<-1 | 1>(1)
 

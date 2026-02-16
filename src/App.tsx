@@ -1,4 +1,4 @@
-import { Timeline } from './components/timeline/Timeline'
+import { Timeline } from './components/timeline/ui/Timeline'
 
 export function App() {
 	return (

@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
 import { Swiper as SwiperType } from 'swiper'
-import type { TimelineEvent } from '../timeline/timelineData'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import type { TimelineEvent } from '../timeline/mockData/timelineData'
 
 import 'swiper/css'
 import './Slider.scss'
