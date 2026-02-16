@@ -6,6 +6,10 @@ import { timelinePeriods } from './timelineData'
 import { useTimelineLayout } from '../../hooks/useTimelineLayout'
 import { TimelineYears } from './TimelineYears'
 import TimelineDots from './TimelineDots'
+import {
+	getTimelineAnchor,
+	getTimelineDots,
+} from '../../utils/timelineGeometry'
 
 export function Timeline() {
 	const circleRef = useRef<HTMLDivElement | null>(null)
@@ -47,30 +51,15 @@ export function Timeline() {
 
 	const rotationDeg = -activeIndex * stepDeg
 
-	const dots = useMemo(() => {
-		if (!circleSize || total === 0) return []
+	const dots = useMemo(
+		() => getTimelineDots({ size: circleSize, total }),
+		[circleSize, total],
+	)
 
-		const r = circleSize / 2
-		const startRad = -Math.PI / 3
-		const radius = r
-
-		return Array.from({ length: total }, (_, i) => {
-			const angle = startRad + (2 * Math.PI * i) / total
-			const x = Math.cos(angle) * radius
-			const y = Math.sin(angle) * radius
-			return { i, x, y }
-		})
-	}, [circleSize, total])
-
-	const anchor = useMemo(() => {
-		if (!circleSize) return null
-
-		const r = circleSize / 2
-		const startRad = -Math.PI / 3
-		const x = Math.cos(startRad) * r
-		const y = Math.sin(startRad) * r
-		return { x, y }
-	}, [circleSize])
+	const anchor = useMemo(
+		() => getTimelineAnchor({ size: circleSize }),
+		[circleSize],
+	)
 
 	const categoryStyle: React.CSSProperties | undefined = anchor
 		? {
